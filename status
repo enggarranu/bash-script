@@ -1,0 +1,14 @@
+#!/bin/bash
+
+webhook_url="https://hooks.slack.com/services/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"
+
+database=$1
+table=$2
+message=$3
+
+#json="{\"channel\": \"pojokan\", \"username\": \"$database\", \"text\": \"\`\`\`Replication for table $table is $message\`\`\`\", \"mrkdwn\": true}"
+json="{\"channel\": \"datafighter-alert\", \"username\": \"$database\", \"text\": \"\`\`\`[tokopedia-product] min(product_pic_id) for table public.ws_product_pic is: $message\`\`\`\", \"icon_emoji\": \":nc3_happy:\", \"mrkdwn\": true}"
+#json="{\"channel\": \"pojokan-alert\", \"username\": \"$database\", \"text\": \"\`\`\`Number of rows for table $table is: $message\`\`\`\", \"icon_emoji\": \":nc3_happy:\", \"mrkdwn\": true}"
+
+curl -d "payload=$json" "$webhook_url"
+unset hostname database table message
